@@ -15,6 +15,7 @@ public class GuiFrame extends JFrame {
         panel1.setBounds(212,200,600,350);
         panel1.setBackground(Color.blue);
         panel1.add(button1);
+        panel1.add(button2);
         panel1.setLayout(null);
         panel1.setVisible(true);
         window.add(panel1);
@@ -26,7 +27,6 @@ public class GuiFrame extends JFrame {
         button1.setFocusable(false);
         // button1.setFont(btnFont);
         button1.setForeground(Color.white);
-        button1.setBounds(0,0,250,50);
         button1.setBackground(Color.black);
         button1.setVisible(true);
         button1.addActionListener(e -> {
@@ -36,8 +36,24 @@ public class GuiFrame extends JFrame {
         });
         
     }
+    public void setButton2(){
+        button2 = new JButton("reset");
+        button2.setBounds(50,150,100,25);
+        button2.setFocusable(false);
+        // button1.setFont(btnFont);
+        button2.setForeground(Color.white);
+        button2.setBackground(Color.black);
+        button2.setVisible(true);
+        button2.addActionListener(e -> {
+            v1.setI(0);
+            button1.setText(""+v1.getI());
+        
+        });
+        
+    }
     public void view1(){
         setButton1();
+        setButton2();
         setPanel1();
 
     }
