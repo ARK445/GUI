@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import javax.swing.JOptionPane;
+
 
 public class GuiFrame extends JFrame {
 
@@ -9,6 +11,7 @@ public class GuiFrame extends JFrame {
     private JButton button1,button2;
     private JPanel panel1;
     private view1Methods v1 = new view1Methods();
+    private JOptionPane pane1;
 
     public void setPanel1(){
         panel1 = new JPanel();
@@ -47,14 +50,17 @@ public class GuiFrame extends JFrame {
         button2.addActionListener(e -> {
             v1.setI(0);
             button1.setText(""+v1.getI());
-        
+            pane1("number reset");
         });
-        
     }
     public void view1(){
         setButton1();
         setButton2();
         setPanel1();
+    }
+    public void pane1(String s){
+         pane1 = new JOptionPane();
+         pane1.showMessageDialog(null,s);
 
     }
     public GuiFrame(){
@@ -64,7 +70,6 @@ public class GuiFrame extends JFrame {
         window.setLocationRelativeTo(null);
         view1();
     }
-
     public void setWindow(){
         window.setResizable(false);
         window.setLayout(null);
