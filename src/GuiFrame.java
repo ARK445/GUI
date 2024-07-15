@@ -11,13 +11,14 @@ public class GuiFrame extends JFrame {
     private JMenu menuForTopMenu;
     private JMenuBar topMenuBar;
     private JMenuItem topMenuItem1, topMenuItem2, topMenuItem3;
+    
 
     private view1Methods v1 = new view1Methods();
-
+    private save sv = new save();
     private void setTopMenuBar() {
         topMenuBar = new JMenuBar();
         menuForTopMenu = new JMenu("Options");
-        topMenuItem1 = new JMenuItem("File");
+        topMenuItem1 = new JMenuItem("Open File");
         topMenuItem2 = new JMenuItem("Save");
         topMenuItem3 = new JMenuItem("Exit");
 
@@ -34,13 +35,37 @@ public class GuiFrame extends JFrame {
     }
 
     private void openFile(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "Open menu item clicked");
+        
+        if(sv.open()){
+            JOptionPane.showMessageDialog(this, "no file saved yet... creating ");
+            sv.saveFile();
+            sv.open();
+            sv.close();
+        }else{
+            JOptionPane.showMessageDialog(this, "save file loaded ");
+            sv.open();
+            v1.setI(Integer.parseInt(sv.getNumber()));
+            sv.close();
+            button1.setText(""+v1.getI());
+        }
     }
 
     // Method to handle "Save" action
     private void saveFile(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "Save menu item clicked");
+        if (sv.open()) {
+            JOptionPane.showMessageDialog(this, "Creating save item...");
+            sv.saveFile();
+            sv.close();  // Save the initial file
+        } else {
+            JOptionPane.showMessageDialog(this, "Saved.");
+            System.out.println("v1: " + v1.getI());
+            System.out.println("sv before v1: " + sv.getNumber());
+            sv.setNumber("" + v1.getI());
+            sv.close();
+            System.out.println("sv after v1: " + sv.getNumber());
+        }
     }
+    
 
     // Method to handle "Exit" action
     private void exitApplication(ActionEvent e) {
