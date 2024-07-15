@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-import javax.swing.JOptionPane;
-
+import java.awt.event.ActionEvent;
 
 public class GuiFrame extends JFrame {
 
@@ -58,7 +57,7 @@ public class GuiFrame extends JFrame {
         setButton2();
         setPanel1();
     }
-    public void pane1(String s){
+    public void  pane1(String s){
          pane1 = new JOptionPane();
          pane1.showMessageDialog(null,s);
 
@@ -69,11 +68,65 @@ public class GuiFrame extends JFrame {
         window.setSize(1024,640);
         window.setLocationRelativeTo(null);
         view1();
+        BasicMenuBarWithMethodReferences();
+        
     }
     public void setWindow(){
         window.setResizable(false);
         window.setLayout(null);
         window.setVisible(true);
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    public void BasicMenuBarWithMethodReferences() {
+        // Set up the frame
+        setTitle("Basic Menu Bar Example with Method References");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Create the menu bar
+        JMenuBar menuBar = new JMenuBar();
+
+        // Create the File menu
+        JMenu fileMenu = new JMenu("File");
+
+        // Create menu items
+        JMenuItem openItem = new JMenuItem("Open");
+        JMenuItem saveItem = new JMenuItem("Save");
+        JMenuItem exitItem = new JMenuItem("Exit");
+
+        // Add menu items to the File menu
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.addSeparator(); // Add a separator line
+        fileMenu.add(exitItem);
+
+        // Add the File menu to the menu bar
+        menuBar.add(fileMenu);
+
+        // Set the menu bar for the frame
+        setJMenuBar(menuBar);
+
+        // Add action listeners using method references
+        menuBar.setVisible(true);
+        openItem.addActionListener(this::openFile);
+        saveItem.addActionListener(this::saveFile);
+        exitItem.addActionListener(this::exitApplication);
+        window.add(menuBar);
+    }
+
+    // Method to handle "Open" action
+    private void openFile(ActionEvent e) {
+        JOptionPane.showMessageDialog(this, "Open menu item clicked");
+    }
+
+    // Method to handle "Save" action
+    private void saveFile(ActionEvent e) {
+        JOptionPane.showMessageDialog(this, "Save menu item clicked");
+    }
+
+    // Method to handle "Exit" action
+    private void exitApplication(ActionEvent e) {
+        System.exit(0);
     }
 }
